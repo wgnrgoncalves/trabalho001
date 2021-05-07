@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>TI Service Solicitacao</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				<h3 class="text-on-pannel text-primary">
+					<strong class="text-uppercase"> Ti Service </strong>
+				</h3>
+				<form th:action="@{/salvar_solicitacao}" th:object="${solicitacao}" method="post">
+					<div class="form-group">
+						<label for="grupo">Grupo solucionador:</label> 
+						<select class="form-control" th:errorclass="is-valid" th:field="*{grupo}">
+							<option value="hardware">Hardware</option>
+							<option value="software">software</option>
+							<option value="Insumos">Insumo</option>
+							<option value="visita">visita</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="descricao">Descrição</label>
+						<textarea class="form-control" th:field="*{descricao}" th:errorclass="is-invalid"  placeholder="Informe uma descrição"></textarea>
+						<div th:erros="*{descricao}" class="invalid-feedback"></div>
+					</div>
+					<div class="form-group">
+						<label for="nome">Nome</label> <input type="text"
+							class="form-control" th:field="*{nome}" th:errorclass="is-invalid" ></input>
+							<div th:errors="*{nome}" class="invalid-feedback"></div>
+					</div>
+					<!-- <div class="form-group">
+						<label for="dt_retorno">Dt Retorno (informe uma datapara
+							retorno)</label> <input type="date" class="form-control" id="dt_retorno"></input>
+					</div> -->
+					<button type="submit" class="btn btn-primary">Enviar</button>
+
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
