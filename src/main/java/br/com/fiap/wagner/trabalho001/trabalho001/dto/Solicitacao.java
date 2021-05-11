@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Solicitacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private long id;
-	
 	
 	private String grupo;
 	
@@ -17,40 +17,44 @@ public class Solicitacao implements Serializable {
 	@NotNull
 	private String descricao;
 	
-	@NotBlank
+	@NotNull
+	@Size(min=2, max=30)
 	private String nome;
-	
-	/*
-	 * @DateTimeFormat(pattern = "dd/MM/yyyy") private Date dt_retorno;
-	 */
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getGrupo() {
 		return grupo;
 	}
+
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	/*
-	 * public Date getDt_retorno() { return dt_retorno; } public void
-	 * setDt_retorno(Date dt_retorno) { this.dt_retorno = dt_retorno; }
-	 */
+
+	
+	
 	
 
 }

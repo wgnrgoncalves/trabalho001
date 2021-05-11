@@ -12,9 +12,10 @@
 		<div class="panel panel-primary">
 			<div class="panel-body">
 				<h3 class="text-on-pannel text-primary">
-					<strong class="text-uppercase"> Ti Service </strong>
+					<strong class="text-uppercase">Ti Service </strong>
 				</h3>
 				<form th:action="@{/salvar_solicitacao}" th:object="${solicitacao}" method="post">
+					<input type="hidden"  th:field="*{id}">
 					<div class="form-group">
 						<label for="grupo">Grupo solucionador:</label> 
 						<select class="form-control" th:errorclass="is-valid" th:field="*{grupo}">
@@ -30,20 +31,13 @@
 						<div th:erros="*{descricao}" class="invalid-feedback"></div>
 					</div>
 					<div class="form-group">
-						<label for="nome">Nome</label> <input type="text"
-							class="form-control" th:field="*{nome}" th:errorclass="is-invalid" ></input>
-							<div th:errors="*{nome}" class="invalid-feedback"></div>
+						<label for="nome">Nome</label> 
+						<input type="text" class="form-control" th:field="*{nome}" th:errorclass="is-invalid" />
+						<div th:errors="*{nome}" class="invalid-feedback"></div>
 					</div>
-					<!-- <div class="form-group">
-						<label for="dt_retorno">Dt Retorno (informe uma datapara
-							retorno)</label> <input type="date" class="form-control" id="dt_retorno"></input>
-					</div> -->
 					<button type="submit" class="btn btn-primary">Enviar</button>
-
-
 				</form>
 			</div>
-
 		</div>
 	</div>
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>

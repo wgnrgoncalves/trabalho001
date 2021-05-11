@@ -14,8 +14,28 @@
 				<h3 class="text-on-pannel text-primary">
 					<strong class="text-uppercase"> Ti Service </strong>
 				</h3>
-				<a href="/abrir_solicitacao" class="btn btn-primary">Abrir
-					solicitação</a>
+				<a href="/abrir_solicitacao" class="btn btn-primary">Abrir solicitação</a>
+				<div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Solicitacao</th>
+								<th scope="col">Grupo</th>
+								<th class="text-center" scope="col">Ação</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="solicitacao : ${solicitacoes}">
+								<td th:text="${solicitacao.nome}"></td>
+								<td th:text="${solicitacao.grupo}"></td>
+								<td class="text-center">
+									<a th:href="@{/solicitacao/{id}(id = ${solicitacao.id})}" class="btn btn-primary">editar</a> 
+									<a th:href="@{/solicitacao/excluir/{id}(id = ${solicitacao.id})}" class="btn btn btn-danger">excluir</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

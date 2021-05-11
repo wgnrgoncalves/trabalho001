@@ -7,57 +7,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.com.fiap.wagner.trabalho001.trabalho001.dto.Solicitacao;
 import br.com.fiap.wagner.trabalho001.trabalho001.service.impl.SolicitacaoServiceImpl;
 
 @Controller
-public class SolicitacaoController {
+public class SolicitacaoController implements WebMvcConfigurer {
 	
 	@Autowired
 	SolicitacaoServiceImpl service;
 	
+	
 	@GetMapping("/abrir_solicitacao")
-	public ModelAndView index() {
-		ModelAndView view = new ModelAndView("abrir_solicitacao");
-		view.addObject(new Solicitacao());
-		return view;
+	public String home(Solicitacao solicitacao) {
+		return "abrir_solicitacao";
 	}
 	
 	@PostMapping("/salvar_solicitacao")
-	public ModelAndView SalvarSolicitacao(@Valid Solicitacao solicitacao, BindingResult result, Model model) {
+	public String SalvarSolicitacao(@Valid Solicitacao solicitacao, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
-			model.addAttribute(solicitacao);
-			return new ModelAndView("abrir_solicitacao");
+			return "abrir_solicitacao";
 		}
 		service.salvarSolicitacao(solicitacao);
-		
-		ModelAndView view = new ModelAndView("salvar_solicitacao");
-
-		return view;
+		return "redirect:/";
 	}
 	
-	
-	/*@PostMapping("/ti_service/ti_confirmacao")
-	public ModelAndView ti_confirmacao(Solicitacao solicitacao) {
-		repository.save(solicitacao);
-		ModelAndView view = new ModelAndView("ti_service/ti_confirmacao");
-
+	@GetMapping("/solicitacao/{id}")
+	public ModelAndView editarSolicitacao(@PathVariable Long id) {
+		ModelAndView view = new ModelAndView("abrir_solicitacao");
+		Solicitacao solicitacao = service.editarSolicitacao(id);
+		view.addObject(solicitacao);
 		return view;
-	}*/
+		
+	}
 	
-	/*@PostMapping("salvar-produto")
-	public String salvarProduto(@Valid Produto produto, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute(produto);
-			return "produto";
-		}
-		service.salvarProduto(produto);
+	@GetMapping("/solicitacao/excluir/{id}")
+	public String excluirSolicitacao(@PathVariable Long id) {
+		service.excluirSolicitacao(id);
 		return "redirect:/";
-	}*/
+	}
 
 }
